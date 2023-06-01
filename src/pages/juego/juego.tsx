@@ -15,13 +15,12 @@ import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material
 import BackspaceIcon from '@mui/icons-material/Backspace';
 import AddIcon from '@mui/icons-material/Add';
 import Fingerprint from '@mui/icons-material/Fingerprint';
-import { ICategoria } from '../../Interfaces/4s';
-import { db, delproduct, getCategorias, newCategoria } from '../../firebase/firecategorias';
+import { ICategoria } from '../../firebase/categorias';
+import { cargarprod, db, delproduct, getCategorias, newCategoria } from '../../firebase/firecategorias';
 import { NavLink } from 'react-router-dom';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-
-
-
+import PublishIcon from '@mui/icons-material/Publish';
+ 
 export const Juego = () => {
   const [categorias, setCategorias] = useState<ICategoria[]>([]);
 
@@ -32,6 +31,9 @@ export const Juego = () => {
     });
   }, []);
 
+// se emplea para hacer el registro en el firebase haciendo referencia a Icat
+// añadiendo el new categoria.
+
   const { register, handleSubmit } = useForm<ICategoria>();
 
   const onAddCategoria = async (dataCategoria: ICategoria) => {
@@ -40,6 +42,10 @@ export const Juego = () => {
     window.location.reload();
   };
 
+  // Const hace la declaracion que utilizaremos acontinuacion en el dialog.
+  // el dialog hace que si "iscollapsed" esta en false se muestre el cuadro de dialogo para insercion al firebase
+  // si el "iscollapsed" esta en true se cierra.
+  // el handletoggle lo uqe hace es cambiar el estado de iscollapsed, atraves de la prop "onClose"
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const handleToggleCollapse = () => {
@@ -57,8 +63,8 @@ export const Juego = () => {
             Players and Honor
           </h1>
          <div className='hj'>
-          <Button component={NavLink} to="../Cuenta"><ExitToAppIcon /></Button>
-       
+          <Button variant='contained' onClick={cargarprod}><PublishIcon/></Button>
+          <Button component={NavLink} to="../Init"><ExitToAppIcon /></Button>
           <Button style={{ display: 'flex', justifyContent: 'end' }} onClick={handleToggleCollapse}>
               {isCollapsed ? <Fingerprint fontSize='large' /> : <Fingerprint />}
             </Button>
@@ -75,9 +81,7 @@ export const Juego = () => {
                 </form>
               </DialogContent>
               <DialogActions>
-                <Button type='submit' variant="contained" sx={{ marginTop: '10px' }}>
-                  {<AddIcon />}
-                </Button>
+              <Button type='submit' variant="contained" onClick={handleSubmit(onAddCategoria)}>{<AddIcon />}</Button>
               </DialogActions>
             </Dialog>
             </div>

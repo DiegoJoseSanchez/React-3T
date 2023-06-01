@@ -7,7 +7,8 @@ export const NavBar = () => {
     <>
       <nav>
         <Link to='Init'>Inicio </Link>
-        <Link to='Foro'> Ranking </Link>
+        <Link to='Foro'> Jugadores </Link>
+        <Link to='Ranking'>Ranking</Link>
         <Link to='Inicio'> Eventos </Link>
         <Link to='Cuenta'> Cuenta </Link>
       </nav>

@@ -3,8 +3,10 @@ import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc } 
 import { useFirestore } from "reactfire";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { firebaseConfig } from "./firebaseconf"; 
-import { ICategoria } from "../Interfaces/4s";
+import { ICategoria } from "./categorias";
 import { nanoid } from 'nanoid'
+import datos from '../datos/datos.json'
+
 
 export const app = initializeApp(firebaseConfig)
 export const db = getFirestore() 
@@ -49,4 +51,16 @@ export const delproduct = async (codigo: string) => {
     }
   };
  
-
+  export const cargarprod = async () => {
+    try {
+        console.log('carga de datos...');
+        datos.map(async (datos) => {
+            const codigo = nanoid(20);
+            const docRef = doc(db, "4story", codigo);
+            await setDoc(docRef, { codigo: codigo, ...datos });
+            window.location.reload();
+        });
+    } catch (error) {
+        console.log(error);
+    }
+};

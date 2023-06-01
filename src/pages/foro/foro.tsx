@@ -5,9 +5,9 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { ICategoria } from '../../Interfaces/4s';
+import { ICategoria } from '../../firebase/categorias';
 import React, { useEffect, useState } from 'react'
-import { getCategorias, newCategoria } from '../../firebase/firecategorias';
+import { cargarprod, getCategorias, newCategoria } from '../../firebase/firecategorias';
 import { CardActionArea, Grid } from '@mui/material';
 
 
@@ -23,6 +23,7 @@ export const Foro = () => {
   }, [])
     return (
       <main className='rank'>
+        
          <Grid container style={{display: "flex", justifyContent: "center", margin: "10px 0px", padding: "10px"}}>
       {categorias.map((categorias) => {
         return(
@@ -54,6 +55,7 @@ export const Foro = () => {
 
       )}
     </Grid>
+   
       </main>
      
 

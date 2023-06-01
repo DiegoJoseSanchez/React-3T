@@ -8,6 +8,7 @@ import { Cuenta } from './pages/cuenta/cuenta';
 import { NavBar } from './navbar/navbar';
 import { Init } from './init/init';
 import { InlayHintKind } from 'typescript';
+import Ranking from './ranking/ranking';
 
 
 export const App = () => {
@@ -19,6 +20,7 @@ export const App = () => {
                     <Route path='/' element={<Init />} /> 
                     <Route path='/Inicio' element={<Inicio />} />
                     <Route path='/Juego' element={<Juego />} />
+                    <Route path='/Ranking' element={<Ranking />} />
                     <Route path='/Foro' element={<Foro />} />
                     <Route path='/Cuenta' element={<Cuenta />} />
                     <Route path='/Init' element={<Init />} />

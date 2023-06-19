@@ -3,7 +3,6 @@ import { getFirestore, collection, getDocs, setDoc, doc, deleteDoc, updateDoc } 
 import { useFirestore } from "reactfire";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { firebaseConfig } from "./firebaseconf"; 
-import { ICategoria } from "./categorias";
 import { nanoid } from 'nanoid'
 import datos from '../datos/datos.json'
 import { Eventos } from "./categorias"
@@ -14,11 +13,11 @@ export const db = getFirestore()
 
 
 //AÑADIR CATEGORIA
-export const newCategoria = async (data: ICategoria) => {
+export const newEvento = async (data: Eventos) => {
     try{
         console.log('Insertando en FB el objeto', data)
         const newData = {codigo: nanoid(20), ...data}
-        const docRef = doc(db, "4story", newData.codigo);
+        const docRef = doc(db, "eventos", newData.codigo);
         await setDoc(docRef, newData);
     }catch(error){
         console.log(error)
@@ -27,22 +26,22 @@ export const newCategoria = async (data: ICategoria) => {
 
 
 //LISTADO DE CATEGORIAS
-export const getCategorias = async ():Promise<ICategoria[]> => {
-    let categorias: ICategoria[] = [];
-    const categoriasRef = collection(db, "4story"); 
+export const getEvento = async ():Promise<Eventos[]> => {
+    let categorias: Eventos[] = [];
+    const categoriasRef = collection(db, "eventos"); 
     const CategoriasDocs = await getDocs(categoriasRef) 
     CategoriasDocs.forEach(doc => {
         const categoria = { ...doc.data() }
-        categorias.push(categoria as ICategoria)
+        categorias.push(categoria as Eventos)
     });
     console.log(categorias);
     return categorias;
 }
 
 // ELIMINAR CATEGORIA
-export const delproduct = async (codigo: string) => {
+export const delEvento = async (codigo: string) => {
     try {
-      const delRef = doc(db, "4story", codigo);
+      const delRef = doc(db, "eventos", codigo);
       await deleteDoc(delRef);
       window.location.reload();
       console.log("Eliminado correctamente");
@@ -52,12 +51,12 @@ export const delproduct = async (codigo: string) => {
     }
   };
  
-  export const cargarprod = async () => {
+  export const masEvento = async () => {
     try {
         console.log('carga de datos...');
         datos.map(async (datos) => {
             const codigo = nanoid(20);
-            const docRef = doc(db, "4story", codigo);
+            const docRef = doc(db, "eventos", codigo);
             await setDoc(docRef, { codigo: codigo, ...datos });
             window.location.reload();
         });
@@ -65,4 +64,3 @@ export const delproduct = async (codigo: string) => {
         console.log(error);
     }
 };
-

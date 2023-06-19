@@ -1,14 +1,36 @@
-import React from 'react';
 import './inicio.css';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
-import Typography from '@mui/material/Typography';
+import * as React from 'react';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+import { Eventos } from '../../firebase/categorias';
+import { getEvento } from '../../firebase/2categoria';
+import { useEffect, useState } from 'react';
+
 
 export const Inicio = () => {
+
+  const [eventos, setEventos] = useState<Eventos[]>([]);
+
+  useEffect(() => {
+    getEvento().then((res) => {
+      console.log(...res);
+      setEventos([...res]);
+    });
+  }, []);
+
+  function handleSubmitOtroEventos(onAddEventos: any): React.FormEventHandler<HTMLFormElement> | undefined {
+    throw new Error('Function not implemented.');
+  }
+
+  function handleToggleCollapse(event: {}, reason: 'backdropClick' | 'escapeKeyDown'): void {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <section className='general'>
       <section id='titulo'>
@@ -31,118 +53,38 @@ export const Inicio = () => {
           3. Recompensas y beneficios: Los eventos en los juegos a menudo ofrecen recompensas y beneficios especiales a los jugadores. Estas recompensas pueden incluir elementos únicos, monedas del juego, experiencia, desbloqueo de contenido adicional, bonificaciones de habilidades, mejoras de personajes, entre otros. Las recompensas brindan incentivos para participar en los eventos y pueden ayudar a los jugadores a progresar en el juego.
         </p>
       </section>
-      <List sx={{ width: '100%', maxWidth: 600, bgcolor: 'background.paper' }}>
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Manteinance'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Mantenimiento 05/07/23
-                </Typography>
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Hora feliz (+100%) - Piedras luna'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Eventos 05/24/23
-                </Typography>
-                {' - ¡Aprovecha, que las piedras de luna están de oferta!'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-        <Divider variant='inset' component='li' />
-        <ListItem alignItems='flex-start'>
-          <ListItemText
-            primary='Bendicion de Leya'
-            secondary={
-              <React.Fragment>
-                <Typography sx={{ display: 'inline' }} component='span' variant='body2' color='text.primary'>
-                  Evento 05/24/23
-                </Typography>
-                {' - Evento de mejora (+250%)'}
-              </React.Fragment>
-            }
-          />
-        </ListItem>
-      </List>
+      <TableContainer component={Paper} id='tabla'>
+         <div className='orden'>
+          <h1>
+            Eventos
+          </h1>
+         <div className='hj'>
+            </div>
+            </div> 
+          <Table sx={{ minWidth: 650 }} aria-label="simple table" style={{ backgroundColor: "white" }}>
+            <TableHead>
+              <TableRow>
+                <TableCell style={{ fontWeight: 500, letterSpacing: "1px" }} align="center">Nombre</TableCell>
+                <TableCell style={{ fontWeight: 500, letterSpacing: "1px" }} align="center">Descripcion</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {eventos.map((eventos) => (
+                <TableRow
+                  key={eventos.codigo}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+
+                  <TableCell align="center">{eventos.name}</TableCell>
+                  <TableCell align="center">{eventos.descripcion}</TableCell>
+                  <TableCell align="center">
+               
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
     </section>
   );
 };

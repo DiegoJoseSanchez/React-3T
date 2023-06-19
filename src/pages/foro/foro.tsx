@@ -48,6 +48,8 @@ export const Foro = () => {
             </CardContent>
           </CardActionArea>
           <CardActions>
+          <Button size="small">Información</Button>
+          
           </CardActions>
         </Card>
         )

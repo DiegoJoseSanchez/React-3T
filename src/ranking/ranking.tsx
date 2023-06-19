@@ -12,13 +12,13 @@ import Paper from '@mui/material/Paper';
 import { ICategoria } from '../firebase/categorias';
 import { getCategorias, newCategoria } from '../firebase/firecategorias';
 
-export const Ranking = () => {
+const Ranking = () => {
   const [categorias, setCategorias] = useState<ICategoria[]>([]);
 
   useEffect(() => {
     getCategorias().then((res) => {
       const sortedCategorias = [...res]
-      .sort((b, a) => b.ap - a.ap); // Ordenar por personaje.ap en orden descendente
+      .sort((a, b) => b.ap - a.ap); // Ordenar por personaje.ap en orden descendente
       setCategorias(sortedCategorias);
     });
   }, []);
@@ -40,19 +40,18 @@ export const Ranking = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {categorias
-              
-                  .map((personaje) => (
-                    <TableRow
-                      key={personaje.codigo}
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-                      <TableCell align="center">{personaje.name}</TableCell>
-                      <TableCell align="center">{personaje.class}</TableCell>
-                      <TableCell align="center">{personaje.country}</TableCell>
-                      <TableCell align="center">{personaje.guild}</TableCell>
-                      <TableCell align="center">{personaje.ap}</TableCell>
-                    </TableRow>
-                  ))}
+                {categorias.map((personaje: ICategoria) => (
+                  <TableRow
+                    key={personaje.codigo}
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                  >
+                    <TableCell align="center">{personaje.name}</TableCell>
+                    <TableCell align="center">{personaje.class}</TableCell>
+                    <TableCell align="center">{personaje.country}</TableCell>
+                    <TableCell align="center">{personaje.guild}</TableCell>
+                    <TableCell align="center">{personaje.ap}</TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

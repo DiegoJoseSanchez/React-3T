@@ -166,7 +166,6 @@ export const Juego = () => {
             Eventos
           </h1>
          <div className='hj'>
-          <Button variant='contained' onClick={masEvento}><PublishIcon/></Button>
           <Button component={NavLink} to="../Init"><ExitToAppIcon /></Button>
           <Button style={{ display: 'flex', justifyContent: 'end' }} onClick={handleToggleCollapse}>
               {isCollapsed ? <Fingerprint fontSize='large' /> : <Fingerprint />}

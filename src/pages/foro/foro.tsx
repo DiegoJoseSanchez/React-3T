@@ -39,7 +39,7 @@ export const Foro: React.FC<ForoProps> = () => {
     <main className='rank'>
       <Grid container style={{ display: 'flex', justifyContent: 'center', margin: '10px 0px', padding: '10px' }}>
         {categorias.map((categoria, index) => (
-          <Card key={categoria.codigo} sx={{ maxWidth: 400, margin: '10px 30px', width: '210px' }}>
+          <Card key={categoria.codigo} sx={{ maxWidth: 400, margin: '10px 30px', width: '200px' }}>
             <CardActionArea>
               <CardMedia
                 component='img'
